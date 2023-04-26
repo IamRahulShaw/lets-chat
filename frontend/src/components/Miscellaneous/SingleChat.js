@@ -21,7 +21,8 @@ import "../CSS/style.css";
 import ScrollableChat from "./ScrollableChat";
 import io from "socket.io-client";
 
-const ENDPOINT = "http://localhost:5000";
+// const ENDPOINT = "http://localhost:5000";
+const ENDPOINT = "https://lets-chat-rlyv.onrender.com";
 
 let socket, selectedChatCompare;
 
