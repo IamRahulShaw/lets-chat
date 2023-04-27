@@ -81,7 +81,7 @@ const createGroupChat = asyncHandler(async (req, res) => {
   };
   try {
     const createdChat = await Chat.create(groupData);
-    const fullChat = await Chat.findOne({ _id: createdChat._id })
+    let fullChat = await Chat.findOne({ _id: createdChat._id })
       .populate("users", "-password")
       .populate("groupAdmin", "-password")
       .populate("latestMessage");
@@ -103,7 +103,7 @@ const renameGroup = asyncHandler(async (req, res) => {
     throw new Error("ChatId and chatName are required");
   }
   try {
-    const updatedGroup = await Chat.findByIdAndUpdate(
+    let updatedGroup = await Chat.findByIdAndUpdate(
       chatId,
       { chatName },
       { new: true }
@@ -129,7 +129,7 @@ const removeFromGroup = asyncHandler(async (req, res) => {
     throw new Error("ChatId and userId are required");
   }
   try {
-    const updatedGroup = await Chat.findByIdAndUpdate(
+    let updatedGroup = await Chat.findByIdAndUpdate(
       chatId,
       { $pull: { users: userId } },
       { new: true }
@@ -155,7 +155,7 @@ const addToGroup = asyncHandler(async (req, res) => {
     throw new Error("ChatId and userId are required");
   }
   try {
-    const updatedGroup = await Chat.findByIdAndUpdate(
+    let updatedGroup = await Chat.findByIdAndUpdate(
       chatId,
       { $push: { users: userId } },
       { new: true }
